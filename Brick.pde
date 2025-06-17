@@ -1,67 +1,62 @@
 class Brick {
-  // Brick properties: position, size, type, and state
-  float x, y, width, height;
-  int type; // Type determines color and hit durability
-  boolean destroyed; // Whether the brick is broken
-  int hitCount;  // Counter to track how many times the brick is hit
-  color col;     // Custom color for bricks (used for moving bricks)
+  float xPos, yPos, width, height;
+  BrickType type; // from enum BrickType
+  boolean destroyed;
+  int hitCount;  
+  color col; 
 
-  // Constructor to initialize a brick with position, size, and type
-  Brick(float x, float y, float w, float h, int type) {
-    this.x = x;
-    this.y = y;
+  Brick(float xPos, float yPos, float w, float h, BrickType type) {
+    this.xPos = xPos;
+    this.yPos = yPos;
     this.width = w;
     this.height = h;
     this.type = type;
     this.destroyed = false; // Initially, the brick is not destroyed
-    this.hitCount = 0;  // Initialize hit count to 0
-    this.col = getColor(type); // Set the initial color based on type
+    this.hitCount = 0;
+    this.col = type.getColor(0); // Get the initial color for the type of brick
   }
 
   // Draw the brick if it is not destroyed
   void draw() {
     if (!destroyed) {
-      fill(col); // Use the custom color
-      rect(x, y, width, height); // Draw the brick as a rectangle
+      col = type.getColor(hitCount); // update color based on hitcount
+      fill(col); 
+      rect(xPos, yPos, width, height); 
     }
   }
 
-  // Get the color of the brick based on its type and hit count
-  color getColor(int type) {
-    switch (type) {
-      case 1:  // Red brick (takes 3 hits to destroy)
-        if (hitCount == 0) return color(200, 50, 50);  // Original red
-        if (hitCount == 1) return color(255, 100, 100);  // Lighter red after 1 hit
-        if (hitCount == 2) return color(255, 150, 150);  // Even lighter red after 2 hits
-        return color(255, 200, 200);  // Disappears after 3 hits
-      case 2:  // Yellow brick (disappears after 1 hit)
-        return color(240, 200, 80);
-      case 3:  // Green brick (takes 2 hits to destroy)
-        if (hitCount == 0) return color(80, 160, 80);  // Original green
-        if (hitCount == 1) return color(120, 200, 120);  // Lighter green after 1 hit
-        return color(160, 240, 160);  // Disappears after 2 hits
-      default:
-        return color(255);  // Default white (for any undefined type)
-    }
-  }
 
-  // Handle brick being hit by the ball
   void hit() {
-    hitCount++;  // Increment the hit count when the brick is hit
+    hitCount++; 
 
-    // Award points based on brick type and hits needed to destroy it
-    if (type == 2 && hitCount == 1) {  // Yellow brick (1 hit required)
+    if (type == BrickType.YELLOW && hitCount == 1) {  // Yellow brick (1 hit to destroy)
       score.addPoints(1);
-      destroyed = true;  // Yellow brick disappears after 1 hit
-    } else if (type == 3 && hitCount == 2) {  // Green brick (2 hits required)
+      destroyed = true;
+    } else if (type == BrickType.GREEN && hitCount == 2) {  // Green brick (2 hits to destroy)
       score.addPoints(2);
       destroyed = true;
-    } else if (type == 1 && hitCount == 3) {  // Red brick (3 hits required)
+    } else if (type == BrickType.RED && hitCount == 3) {  // Red brick (3 hits to destroy)
       score.addPoints(3);
       destroyed = true;
     }
+  }
 
-    // Update the brick's color after being hit
-    col = getColor(type);
+
+  // these methods are for collision of the ball with the corners of a brick
+  float[] getBottomLeftCorner() {
+    float[] coords = {xPos, yPos + height};
+    return coords;
+  }
+  float[] getBottomRightCorner() {
+    float[] coords = {xPos + width, yPos + height};
+    return coords;
+  }
+  float[] getTopLeftCorner() {
+    float[] coords = {xPos, yPos};
+    return coords;
+  }
+  float[] getTopRightCorner() {
+    float[] coords = {xPos + width, yPos};
+    return coords;
   }
 }
