@@ -14,7 +14,7 @@ class Lives {
   }
 
   // Check if the game is over (no lives remaining)
-  boolean isGameOver() {
+  boolean haveRunOut() {
     return lives <= 0;
   }
 

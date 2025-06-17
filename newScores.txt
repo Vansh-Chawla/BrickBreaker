@@ -1,0 +1,7 @@
+sam,93
+rachel,22
+john,17
+jasmine,64
+julia,80
+ross,80
+

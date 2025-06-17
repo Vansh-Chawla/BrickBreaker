@@ -1,0 +1,5 @@
+Rachel, 20
+Monica, 15
+Ross, 10
+Jeff, 25
+Matt, 22

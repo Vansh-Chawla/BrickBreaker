@@ -1,0 +1,72 @@
+7]  (COMPLETED) (Julija) Add powerups as mentioned in the spec: "Add at least two power-ups, inspired by Arkanoid or Batty. Each power-up should be distinctly
+    different and affect a different aspect of the game dynamics. 
+    For example, speed of ball, size of ball, bounce/smash of ball, speed of paddle, size of paddle, or ‘special effects’ like skip to next
+    level or invincibility for some time. "
+
+
+10]     (COMPLETED) (Sam) - make a level 3, and if level 3 completed then show leaderboard
+
+
+
+1]  (COMPLETED) (Sam) Try to refactor so that a type 3 brick takes 3 hits to destroy, a type 2 takes 2 hits to destroy ..... 
+    OR we could use some sort of data structure like an enum, hashmap, ...
+
+
+
+2]  (COMPLETED)   (Julija)  Always spawn the paddle and the ball in the centre of the screen after losing a life (or have a padding from the
+                                edges so that the ball can never spawn inside of the wall)
+
+
+
+
+3]  (COMPLETED) (Sam) Centre bricks (and maybe fill each grid space) in the grid (at the moment the bricks are in the top left corner of each grid section)
+
+
+
+
+4]  (COMPLETED)  (Sam)   Fix the movement system of the ball so that the speed does not change when direction does (consider trig)
+
+
+
+
+5]  (COMPLETED-semi)     (Sam)     
+
+        The collision is still a bit janky - CONSIDER when ball hits near corner but corner still in radius of ball. 
+        CONSIDER when ball moving towards top right of screen and hits bottom right corner, and how the direction of ball changes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Fix the collison system of the ball (so that no phasing through bricks). 
+            - Specifically for bricks, look into stepping the ball between a start 
+            and end position. E.g. if the ball is moving from (1, 2) to (2, 4), check if the ball would collide at (1, 2) (1, 3) (2, 3) (2, 4).
+
+            - As far as colliding with corners, we could have an x collison check, a y collison check, and if they are both true it must be a corner.
+            Then, we determine how close to the actual corner it was and determine a refelction trajectory; OR we could have a 'hitbox' of the rectangle
+            which R (the ball's radius) out from the rectangle. For example, the top of the hit box would be R above the actual top of the rectangle.
+            For corners, instead of then considering a locus (circular corners) we can get away with just making it square. Then, if the [centre] of
+            the ball is every in this 'hitbox', we know that there was a collision, and can determine what subsequent action to take based on 
+            the position in the hitbox.
+
+        ^ These are just some ideas
+
+
+
+
+
+
+6]  (COMPLETED)  (Julija)    Change leaderboard so that you are only prompted for your name if your score is in the top 5, as specified in the specification:
+    "If the player's score is in the top 5, they should be able to enter their name and should appear in the leaderboard"
+
+
+
+
+
+8] (COMPLETED)   (Sam)   : 
+THIS IS STILL A BIT JANKY, in particular the collision of the ball with the triangle: https://www.phatcode.net/articles.php?id=459
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"Add creatures like Batty that randomly appear and reflect the ball in a random direction on contact."
+
+
+
+
+
+9] (COMPLETED) (Julija) Tertiary requirement (lowest priority): "Write additional classes to test the functionality of your methods, for example using JUnit"

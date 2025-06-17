@@ -1,0 +1,21 @@
+
+
+Consider optimising the way that the ball checks if it has collided with a brick (i.e. only look at bricks in the same quadrant as the ball, by 
+restricting the coordinates and thus the bricks that are checked)
+
+
+
+
+double-check about ball collision at centre of paddle
+
+
+
+
+There seems to be some sort of issue where the ball gets trapped in the wall border when it hits the furthest bit of the paddle very close to the
+wall. It might have something to do with how the paddle movement and collision detection work (we might be having phantom collisions).
+It  could also have something to do with how the ball is  being moved out of the way of the paddle after a collision
+
+
+
+
+The methods for levels thing in main doesn't seem like the best way to do levels. Perhaps we could use/could have used classes?
